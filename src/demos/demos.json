@@ -1,0 +1,7 @@
+{
+    "layout": "layouts/demo.njk",
+    "tags": ["demo"],
+    "eleventyComputed": {
+        "permalink": "/demos/{{ page.fileSlug }}/"
+    }
+}

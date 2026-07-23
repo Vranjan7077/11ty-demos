@@ -1,0 +1,14 @@
+<p>Both blocks below are highlighted at build time by <code>@11ty/eleventy-plugin-syntaxhighlight</code> — zero client-side JS ships to render them:</p>
+
+{% highlight "js" %}
+const greet = (name) => `Hello, ${name}!`;
+console.log(greet("Eleventy"));
+{% endhighlight %}
+
+{% highlight "css" %}
+.button {
+  --button-bg: var(--color-accent);
+  background: var(--button-bg);
+  border-radius: var(--radius-md);
+}
+{% endhighlight %}

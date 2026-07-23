@@ -1,0 +1,20 @@
+<p>This is a real Netlify Forms submission form. Fill it out and submit it once this site is deployed on Netlify and it'll actually land in the Netlify dashboard, no backend of your own required.</p>
+<form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="contact-form">
+  <input type="hidden" name="form-name" value="contact">
+  <p class="visually-hidden">
+    <label>Don't fill this out if you're human: <input name="bot-field"></label>
+  </p>
+  <div class="form-field">
+    <label for="contact-name">Name</label>
+    <input id="contact-name" name="name" type="text" autocomplete="name" required>
+  </div>
+  <div class="form-field">
+    <label for="contact-email">Email</label>
+    <input id="contact-email" name="email" type="email" autocomplete="email" required>
+  </div>
+  <div class="form-field">
+    <label for="contact-message">Message</label>
+    <textarea id="contact-message" name="message" rows="5" required></textarea>
+  </div>
+  <button type="submit" class="button">Send message</button>
+</form>

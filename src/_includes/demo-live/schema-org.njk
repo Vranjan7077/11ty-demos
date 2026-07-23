@@ -1,0 +1,11 @@
+<p>This exact page also emits real JSON-LD structured data — invisible on screen, present in the actual HTML. View Page Source (<kbd>Ctrl</kbd>+<kbd>U</kbd>) and search for <code>application/ld+json</code> to see it directly. Built from the same real front-matter values as the hero above:</p>
+{% set schemaExample = {
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": title,
+  "description": description,
+  "url": site.url + page.url,
+  "datePublished": date | htmlDateString,
+  "keywords": tags | join(", ")
+} %}
+<pre class="data-files-demo__json"><code>{{ schemaExample | toJson }}</code></pre>

@@ -1,0 +1,11 @@
+<p>Every value below comes straight from <code>src/_data/site.js</code> — the same file that sets this page's browser tab title, the footer copyright, and every other page on this site:</p>
+<dl class="data-files-demo">
+  <div class="data-files-demo__row"><dt>site.title</dt><dd>{{ site.title }}</dd></div>
+  <div class="data-files-demo__row"><dt>site.author.name</dt><dd>{{ site.author.name }}</dd></div>
+  <div class="data-files-demo__row"><dt>site.author.url</dt><dd>{{ site.author.url }}</dd></div>
+  <div class="data-files-demo__row"><dt>site.year</dt><dd>{{ site.year }}</dd></div>
+</dl>
+
+<p>The whole object, dumped as real JSON with the <code>toJson</code> filter — the same object, no separate copy to keep in sync:</p>
+<pre class="data-files-demo__json"><code>{{ site | toJson }}</code></pre>
+

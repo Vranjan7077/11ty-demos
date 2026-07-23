@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 225">
+  <rect width="400" height="225" fill="#12141d"/>
+  <text x="60" y="100" font-family="monospace" font-size="22" fill="#b0529c">{% </text>
+  <text x="100" y="100" font-family="monospace" font-size="22" fill="#3a7bd5">icon</text>
+  <text x="175" y="100" font-family="monospace" font-size="22" fill="#1f9d63">"eye"</text>
+  <text x="255" y="100" font-family="monospace" font-size="22" fill="#b0529c"> %}</text>
+  <text x="60" y="135" font-family="monospace" font-size="20" fill="#a3a7bd">// registered by filename</text>
+</svg>

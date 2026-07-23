@@ -1,0 +1,26 @@
+{% import "components/tag-list.njk" as tagListC %}
+{% import "components/difficulty-badge.njk" as badgeC %}
+
+{% macro demoCard(demo) %}
+<article class="demo-card">
+  <div class="demo-card__thumb-link">
+    <img
+      class="demo-card__thumb"
+      src="{{ demo.data.thumbnail or '/assets/images/demos/placeholder.svg' }}"
+      alt=""
+      loading="lazy"
+      width="400"
+      height="225"
+    >
+  </div>
+  <div class="demo-card__body">
+    {% if demo.data.difficulty %}{{ badgeC.difficultyBadge(demo.data.difficulty) }}{% endif %}
+    <h2 class="demo-card__title"><a href="{{ demo.url }}">{{ demo.data.title }}</a></h2>
+    <p class="demo-card__desc">{{ demo.data.description | excerpt(18) }}</p>
+    <div class="demo-card__meta">
+      <span class="demo-card__reading-time">{{ demo.templateContent | readingTime }} read</span>
+      {{ tagListC.tagList(demo.data.tags) }}
+    </div>
+  </div>
+</article>
+{% endmacro %}

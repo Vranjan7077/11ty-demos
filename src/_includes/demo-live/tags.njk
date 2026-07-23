@@ -1,0 +1,6 @@
+<p>Every tag below is generated from the <code>demoTags</code> collection — add a new tag to any demo's front matter and a page for it appears here automatically:</p>
+<ul class="tag-list tag-list--demo">
+  {% for t in collections.demoTags %}
+  <li><a class="tag-pill" href="/demos/tags/{{ t | slugify }}/">{{ t }}</a></li>
+  {% endfor %}
+</ul>

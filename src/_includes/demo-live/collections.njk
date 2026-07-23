@@ -1,0 +1,11 @@
+{% set recent = collections.recentActivity | limit(5) %}
+<p>This list is one collection, mixing two different content types (demos and blog posts), sorted by date. It's not filtered to only show demos:</p>
+<ul class="demo__live-list">
+  {% for item in recent %}
+  <li>
+    <a href="{{ item.url }}">{{ item.data.title }}</a>
+    — <time datetime="{{ item.date | htmlDateString }}">{{ item.date | readableDate }}</time>
+    {% if "demo" in item.data.tags %}<span class="tag-pill">demo</span>{% else %}<span class="tag-pill">post</span>{% endif %}
+  </li>
+  {% endfor %}
+</ul>

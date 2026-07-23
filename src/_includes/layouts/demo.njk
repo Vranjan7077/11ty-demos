@@ -1,0 +1,71 @@
+{% extends "layouts/base.njk" %}
+{% import "components/breadcrumbs.njk" as bcC %}
+{% import "components/tag-list.njk" as tagListC %}
+{% import "components/difficulty-badge.njk" as badgeC %}
+{% import "components/demo-card.njk" as demoCardC %}
+{% import "components/pagination-nav.njk" as paginationC %}
+
+{% set sib = collections.demos | siblings(page.url) %}
+{% set related = collections.demos | relatedDemos(page.url, tags, 3) %}
+
+{% set schema = {
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": title,
+  "description": description,
+  "url": site.url + page.url,
+  "datePublished": date | htmlDateString,
+  "author": {
+    "@type": "Person",
+    "name": site.author.name,
+    "url": site.author.url
+  },
+  "keywords": tags | join(", ")
+} %}
+
+{% block content %}
+<script type="application/ld+json">{{ schema | jsonLd | safe }}</script>
+<article class="wrapper demo">
+  {{ bcC.breadcrumbs([
+    { text: "Home", url: "/" },
+    { text: "Demos", url: "/demos/" },
+    { text: title }
+  ]) }}
+
+  <header class="demo__hero">
+    {% if difficulty %}{{ badgeC.difficultyBadge(difficulty) }}{% endif %}
+    <h1 class="demo__title">{{ title }}</h1>
+    <p class="demo__lede">{{ description }}</p>
+    <div class="demo__meta">
+      <span class="demo__reading-time">{{ content | readingTime }} read</span>
+      {{ tagListC.tagList(tags) }}
+    </div>
+  </header>
+
+  {% if demoBlock %}
+  <section class="demo__live" aria-labelledby="live-implementation">
+    <h2 id="live-implementation" class="demo__section-title">Live Implementation</h2>
+    <div class="demo__live-frame">
+      {% include demoBlock %}
+    </div>
+  </section>
+  {% endif %}
+
+  <div class="demo__content">
+    {{ content | safe }}
+  </div>
+
+  {% if related.length %}
+  <section class="demo__related" aria-labelledby="related-demos">
+    <h2 id="related-demos" class="demo__section-title">Related Demos</h2>
+    <div class="demo-grid">
+      {% for item in related %}
+        {{ demoCardC.demoCard(item) }}
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  {{ paginationC.paginationNav(sib.prev, sib.next) }}
+</article>
+{% endblock %}

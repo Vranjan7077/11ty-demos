@@ -1,0 +1,6 @@
+<p>Six real architecture photos fetched live from Pexels, each keeping its own natural height, arranged with plain CSS multi-column layout — no JavaScript, no masonry library:</p>
+<div class="masonry-gallery">
+  {% for item in masonryGalleryDemo %}
+  <div class="masonry-gallery__item">{{ item | safe }}</div>
+  {% endfor %}
+</div>

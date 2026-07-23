@@ -1,0 +1,28 @@
+.view-counter {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2xs);
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    border: var(--border-thick) solid var(--color-fg);
+    border-radius: var(--radius-pill);
+    padding: 0.5em 1em;
+    box-shadow: var(--shadow-hard);
+}
+
+.view-counter__icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    color: var(--color-accent-strong);
+}
+
+.view-counter__count {
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+.view-counter.is-unavailable .view-counter__count {
+    color: var(--color-fg-muted);
+    font-weight: 400;
+}

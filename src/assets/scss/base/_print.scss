@@ -1,0 +1,51 @@
+@media print {
+    :root,
+    :root[data-theme="dark"],
+    :root[data-theme="light"] {
+        --color-bg: #ffffff;
+        --color-bg-raised: #ffffff;
+        --color-bg-inset: #f2f2f2;
+        --color-fg: #000000;
+        --color-fg-muted: #333333;
+        --color-border: #999999;
+        --color-accent-strong: #000000;
+        --color-code-bg: #f2f2f2;
+        --token-string: #146b45;
+        --token-keyword: #8a3d7a;
+        --token-function: #2a5fb0;
+        --token-number: #a05a1a;
+        --token-property: #8a6a15;
+        --shadow-hard: none;
+        --shadow-hard-lg: none;
+    }
+
+    html,
+    body {
+        background: #fff;
+        color: #000;
+    }
+
+    .site-header,
+    .site-footer,
+    .skip-link,
+    .breadcrumbs,
+    .demo__related,
+    .pagination-nav {
+        display: none !important;
+    }
+
+    .demo-card,
+    .demo__live-frame,
+    pre,
+    blockquote,
+    img,
+    svg {
+        break-inside: avoid;
+    }
+
+    a[href^="http"]:not([href*="11ty-demos.netlify.app"])::after {
+        content: " (" attr(href) ")";
+        font-size: 0.8em;
+        color: #555;
+    }
+}

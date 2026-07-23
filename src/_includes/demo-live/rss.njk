@@ -1,0 +1,9 @@
+<p>The feed is live at <a href="/feed.xml"><code>/feed.xml</code></a>. Current entries, pulled straight from the <code>posts</code> collection:</p>
+<ul class="demo__live-list">
+  {% for post in collections.posts %}
+  <li>
+    <a href="{{ post.url }}">{{ post.data.title }}</a>
+    — <time datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate }}</time>
+  </li>
+  {% endfor %}
+</ul>

@@ -1,0 +1,6 @@
+<p>Six real photos fetched live from Pexels, each resized to two widths and encoded as WebP and JPEG, laid out in a plain CSS grid:</p>
+<div class="image-gallery">
+  {% for item in imageGalleryDemo %}
+  <div class="image-gallery__item">{{ item | safe }}</div>
+  {% endfor %}
+</div>

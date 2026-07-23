@@ -1,0 +1,7 @@
+<p>The same <code>icon</code> shortcode that renders the eye icon on the <a href="/demos/view-counter/">View Counter</a> demo, reused here with a second, different icon file to prove it isn't tied to just one:</p>
+<p class="shortcode-demo__icons">
+  {% icon "eye", "shortcode-demo__icon" %}
+  {% icon "check", "shortcode-demo__icon" %}
+</p>
+
+<p><code>demoLink</code> — a second custom shortcode, unlike <code>icon</code> it returns real HTML directly (not a Markdown fence like <code>codeFile</code>), so it's safe to call from this <code>.njk</code> partial too: {% demoLink "custom-filters", "Custom Filters" %}.</p>

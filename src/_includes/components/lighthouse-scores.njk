@@ -1,0 +1,37 @@
+{% macro lighthouseScores(categories, isFallback) %}
+<ul class="lighthouse-scores" aria-label="Lighthouse scores">
+  {% for key, result in categories %}
+  <li
+    class="lighthouse-pill lighthouse-pill--{{ result.grade }}"
+    title="{{ result.title }}{% if isFallback %} (data unavailable){% endif %}"
+  >
+    <span class="lighthouse-pill__dot" aria-hidden="true"></span>
+    <span class="visually-hidden">{{ result.title }}:</span>
+    {{ result.title }} <b>{{ result.score }}</b>
+  </li>
+  {% endfor %}
+</ul>
+{% endmacro %}
+
+{% macro lighthouseGauges(categories, isFallback) %}
+<ul class="lighthouse-gauges" aria-label="Lighthouse scores">
+  {% for key, result in categories %}
+  <li class="lighthouse-gauge lighthouse-gauge--{{ result.grade }}">
+    <svg class="lighthouse-gauge__ring" viewBox="0 0 36 36" role="img" aria-labelledby="lighthouse-gauge-{{ key }}">
+      <title id="lighthouse-gauge-{{ key }}">{{ result.title }}: {{ result.score }} out of 100{% if isFallback %} (data unavailable){% endif %}</title>
+      <path
+        class="lighthouse-gauge__track"
+        d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+      />
+      <path
+        class="lighthouse-gauge__value"
+        stroke-dasharray="{{ result.score }}, 100"
+        d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+      />
+      <text x="18" y="20.5" class="lighthouse-gauge__number">{{ result.score }}</text>
+    </svg>
+    <span class="lighthouse-gauge__label">{{ result.title }}</span>
+  </li>
+  {% endfor %}
+</ul>
+{% endmacro %}

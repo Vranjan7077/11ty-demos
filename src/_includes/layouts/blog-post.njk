@@ -1,0 +1,25 @@
+{% extends "layouts/base.njk" %}
+{% import "components/breadcrumbs.njk" as bcC %}
+
+{% block content %}
+<article class="wrapper post">
+  {{ bcC.breadcrumbs([
+    { text: "Home", url: "/" },
+    { text: "Blog", url: "/blog/" },
+    { text: title }
+  ]) }}
+
+  <header class="post__header">
+    <h1 class="post__title">{{ title }}</h1>
+    <p class="post__meta">
+      <time datetime="{{ date | htmlDateString }}">{{ date | readableDate }}</time>
+      <span aria-hidden="true">·</span>
+      {{ content | readingTime }} read
+    </p>
+  </header>
+
+  <div class="post__content">
+    {{ content | safe }}
+  </div>
+</article>
+{% endblock %}

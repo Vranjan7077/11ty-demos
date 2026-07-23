@@ -1,0 +1,73 @@
+{
+    "name": "11ty-demos",
+    "version": "1.0.0",
+    "private": true,
+    "description": "A single Eleventy site that showcases many independent 11ty implementation patterns as standalone demo pages.",
+    "type": "module",
+    "author": {
+        "name": "Vinay Ranjan",
+        "url": "https://vranjan.dev/"
+    },
+    "homepage": "https://github.com/Vranjan7077/11ty-demos#readme",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Vranjan7077/11ty-demos.git"
+    },
+    "bugs": {
+        "url": "https://github.com/Vranjan7077/11ty-demos/issues"
+    },
+    "engines": {
+        "node": ">=20"
+    },
+    "keywords": [
+        "eleventy",
+        "11ty",
+        "static-site-generator",
+        "nunjucks",
+        "netlify",
+        "demo"
+    ],
+    "scripts": {
+        "clean": "rimraf public",
+        "build": "run-s clean build:eleventy build:pagefind build:js",
+        "build:eleventy": "eleventy",
+        "build:pagefind": "pagefind --site public",
+        "build:js": "run-p build:js:main build:js:search build:js:toc build:js:view-counter build:js:copy-code",
+        "build:js:main": "terser src/assets/js/main.js -c -m -o public/assets/js/main.js",
+        "build:js:search": "terser src/assets/js/search.js -c -m -o public/assets/js/search.js",
+        "build:js:toc": "terser src/assets/js/toc.js -c -m -o public/assets/js/toc.js",
+        "build:js:view-counter": "terser src/assets/js/view-counter.js -c -m -o public/assets/js/view-counter.js",
+        "build:js:copy-code": "terser src/assets/js/copy-code.js -c -m -o public/assets/js/copy-code.js",
+        "start": "eleventy --serve",
+        "debug": "cross-env DEBUG=Eleventy* eleventy",
+        "test": "node --test",
+        "lint": "eslint .",
+        "format": "prettier --write \"**/*.{js,scss,json,md}\"",
+        "format:check": "prettier --check \"**/*.{js,scss,json,md}\""
+    },
+    "dependencies": {
+        "@11ty/eleventy": "^3.1.2",
+        "@11ty/eleventy-img": "^6.0.4",
+        "@11ty/eleventy-navigation": "^1.0.4",
+        "@11ty/eleventy-plugin-rss": "^2.0.4",
+        "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.1",
+        "@netlify/blobs": "^10.7.9",
+        "dotenv": "^17.4.2",
+        "eleventy-plugin-reading-time": "^0.0.1",
+        "fast-glob": "^3.3.3",
+        "html-minifier-terser": "^7.2.0",
+        "markdown-it-anchor": "^9.2.0",
+        "sass": "^1.83.4"
+    },
+    "devDependencies": {
+        "@eslint/js": "^10.0.1",
+        "cross-env": "^7.0.3",
+        "eslint": "^10.7.0",
+        "globals": "^17.7.0",
+        "npm-run-all2": "^8.0.4",
+        "pagefind": "^1.5.2",
+        "prettier": "^3.9.6",
+        "rimraf": "^6.1.3",
+        "terser": "^5.49.0"
+    }
+}

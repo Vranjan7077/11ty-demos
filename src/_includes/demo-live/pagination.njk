@@ -1,0 +1,14 @@
+{% import "components/pager.njk" as pagerC %}
+{% set pageSize = 3 %}
+{% set totalPages = (collections.posts.length / pageSize) | round(0, "ceil") %}
+{%- set hrefs = [] -%}
+{%- for i in range(0, totalPages) -%}
+  {%- if i == 0 -%}
+    {%- set href = "/blog/" -%}
+  {%- else -%}
+    {%- set href = "/blog/" ~ (i + 1) ~ "/" -%}
+  {%- endif -%}
+  {%- set hrefs = (hrefs.push(href), hrefs) -%}
+{%- endfor -%}
+<p>This is the real pager from <a href="/blog/">/blog/</a> — {{ collections.posts.length }} posts, {{ pageSize }} per page. Click a number, it goes to a real page:</p>
+{{ pagerC.pager(0, hrefs) }}

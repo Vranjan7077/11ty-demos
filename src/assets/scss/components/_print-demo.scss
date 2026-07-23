@@ -1,0 +1,19 @@
+.print-demo-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2xs);
+}
+
+.print-demo-list li {
+    padding: var(--space-2xs) var(--space-sm);
+    border: 2px solid var(--color-fg);
+}
+
+kbd {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    background: var(--color-code-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: 0.1em 0.5em;
+}

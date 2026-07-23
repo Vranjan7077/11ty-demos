@@ -1,0 +1,37 @@
+---
+title: "Demos"
+description: "Every Eleventy implementation pattern on this site, in one place — real, working, and self-contained."
+eleventyNavigation:
+  key: Demos
+  order: 2
+---
+{% extends "layouts/base.njk" %}
+{% import "components/demo-card.njk" as demoCardC %}
+
+{% set schema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": title,
+  "description": description,
+  "url": site.url + page.url,
+  "mainEntity": {
+    "@type": "ItemList",
+    "itemListElement": collections.demos | demosToItemList(site.url)
+  }
+} %}
+
+{% block content %}
+<script type="application/ld+json">{{ schema | jsonLd | safe }}</script>
+<div class="wrapper">
+  <header class="page__header">
+    <h1 class="page__title">{{ title }}</h1>
+    <p class="page__lede">{{ description }}</p>
+  </header>
+
+  <div class="demo-grid">
+    {% for demo in collections.demos %}
+      {{ demoCardC.demoCard(demo) }}
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

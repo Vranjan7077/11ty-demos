@@ -1,0 +1,6 @@
+<p>The real file is at <a href="/sitemap.xml">/sitemap.xml</a> — not a mockup, the actual file search engines fetch. On this exact build, it's stitched together from three different sources:</p>
+<ul class="filter-demo-list">
+  <li>Every real page in collections.all, filtered down to ones with a trailing-slash URL</li>
+  <li>{{ collections.demoTags.length | pluralize("tag page") }}, added back in by hand</li>
+  <li>Extra pagination pages, reconstructed from {{ collections.posts.length | pluralize("blog post") }}</li>
+</ul>

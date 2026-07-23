@@ -1,0 +1,10 @@
+{% set headings = content | toc %}
+<p>This table of contents was extracted from <em>this page's own headings</em> at build time:</p>
+<nav class="toc" aria-label="On this page" data-toc>
+  <p class="toc__label">On this page</p>
+  <ol class="toc__list">
+    {% for h in headings %}
+    <li class="toc__item toc__item--h{{ h.level }}"><a href="#{{ h.id }}">{{ h.text }}</a></li>
+    {% endfor %}
+  </ol>
+</nav>

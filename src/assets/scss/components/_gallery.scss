@@ -1,0 +1,28 @@
+.image-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: var(--space-sm);
+}
+
+.image-gallery__item img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border: var(--border-thick) solid var(--color-fg);
+}
+
+.masonry-gallery {
+    columns: 3 180px;
+    column-gap: var(--space-sm);
+}
+
+.masonry-gallery__item {
+    break-inside: avoid;
+    margin-bottom: var(--space-sm);
+}
+
+.masonry-gallery__item img {
+    width: 100%;
+    display: block;
+    border: var(--border-thick) solid var(--color-fg);
+}

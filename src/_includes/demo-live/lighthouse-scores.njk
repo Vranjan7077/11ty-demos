@@ -1,0 +1,4 @@
+{% import "components/lighthouse-scores.njk" as lighthouseC %}
+<p>These badges are real, committed data, not a live API call from your browser. {% if lighthouse.isFallback %}No scores have been fetched yet — this is the fallback state.{% else %}Last refreshed {{ lighthouse.fetchedAt | readableDate }}.{% endif %}</p>
+{{ lighthouseC.lighthouseScores(lighthouse.categories, lighthouse.isFallback) }}
+{{ lighthouseC.lighthouseGauges(lighthouse.categories, lighthouse.isFallback) }}

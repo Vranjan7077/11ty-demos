@@ -1,0 +1,45 @@
+---
+title: ""
+description: "A single Eleventy site collecting independent, real, working implementations of common 11ty patterns — one demo per page."
+eleventyNavigation:
+  key: Home
+  order: 1
+---
+{% extends "layouts/base.njk" %}
+{% import "components/demo-card.njk" as demoCardC %}
+
+{% set featured = collections.demos | limit(6) %}
+
+{% block content %}
+<div class="wrapper page">
+  <section class="hero">
+    <h1 class="hero__title">Real 11ty examples, not tutorials.</h1>
+    <p class="hero__lede">{{ site.description }}</p>
+    <p class="hero__actions">
+      <a class="button" href="/demos/">Browse all demos</a>
+      <a href="/about/">How this works →</a>
+    </p>
+  </section>
+
+  <section class="home-section">
+    <h2 class="home-section__title">Featured</h2>
+    <div class="demo-grid">
+      {% for demo in featured %}
+        {{ demoCardC.demoCard(demo) }}
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="home-section">
+    <div class="home-section--info">
+      <h2 class="home-section__title">Adding a new demo</h2>
+      <p>
+        Want to add one? Drop a Markdown file into <code>src/demos/</code> with a title, description,
+        tags, and a difficulty level. That's it. It shows up on the listing page, gets its own tag pages,
+        becomes searchable, and slots into the previous/next navigation on its own. You don't touch
+        anything else.
+      </p>
+    </div>
+  </section>
+</div>
+{% endblock %}

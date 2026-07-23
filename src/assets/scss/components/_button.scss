@@ -1,0 +1,29 @@
+.button {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--space-2xs) var(--space-md);
+    border: var(--border-thick) solid var(--color-fg);
+    background: var(--color-bg);
+    color: var(--color-fg);
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: var(--shadow-hard);
+    transition:
+        transform 0.1s ease,
+        box-shadow 0.1s ease;
+}
+
+.button:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 0 var(--color-fg);
+}
+
+.button:active {
+    transform: translate(4px, 4px);
+    box-shadow: none;
+}
+
+.button--fill {
+    background: var(--color-fg);
+    color: var(--color-bg);
+}

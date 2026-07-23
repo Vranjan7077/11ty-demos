@@ -1,0 +1,74 @@
+name: Update Lighthouse Scores
+
+on:
+    schedule:
+        - cron: "0 0 * * 0"
+    workflow_dispatch:
+
+jobs:
+    update-scores:
+        runs-on: ubuntu-latest
+        permissions:
+            contents: write
+        steps:
+            - uses: actions/checkout@v5
+
+            - uses: actions/setup-node@v5
+              with:
+                  node-version: 20
+
+            - name: Fetch PageSpeed scores
+              env:
+                  PAGESPEED_API_KEY: ${{ secrets.PAGESPEED_API_KEY }}
+              run: |
+                  if [ -z "$PAGESPEED_API_KEY" ]; then
+                    echo "PAGESPEED_API_KEY secret is not set. Add it in repo Settings -> Secrets -> Actions."
+                    exit 1
+                  fi
+
+                  RESPONSE=$(curl -sf -G "https://www.googleapis.com/pagespeedonline/v5/runPagespeed" \
+                    --data-urlencode "url=https://11ty-demos.netlify.app/" \
+                    --data-urlencode "key=${PAGESPEED_API_KEY}" \
+                    --data-urlencode "strategy=mobile" \
+                    --data-urlencode "category=PERFORMANCE" \
+                    --data-urlencode "category=ACCESSIBILITY" \
+                    --data-urlencode "category=BEST-PRACTICES" \
+                    --data-urlencode "category=SEO" \
+                    --data-urlencode "fields=lighthouseResult.categories.*.score,lighthouseResult.categories.*.title" \
+                    --data-urlencode "prettyPrint=false")
+
+                  if [ $? -ne 0 ] || [ -z "$RESPONSE" ]; then
+                    echo "API call failed"
+                    exit 1
+                  fi
+
+                  echo "$RESPONSE" | node -e "
+                    const fs = require('fs');
+                    const data = JSON.parse(fs.readFileSync('/dev/stdin', 'utf8'));
+                    const cats = data?.lighthouseResult?.categories;
+                    if (!cats || !Object.keys(cats).length) {
+                      console.error('No category data');
+                      process.exit(1);
+                    }
+                    function getGrade(s) { return s < 0.5 ? 'poor' : s < 0.9 ? 'average' : 'good'; }
+                    const result = { isFallback: false, categories: {} };
+                    for (const [key, val] of Object.entries(cats)) {
+                      result.categories[key] = {
+                        score: (val.score * 100).toFixed(),
+                        title: val.title,
+                        grade: getGrade(val.score)
+                      };
+                    }
+                    result.fetchedAt = new Date().toISOString();
+                    fs.writeFileSync('src/_data/lighthouseScores.json', JSON.stringify(result, null, 2));
+                    console.log('Scores updated:', JSON.stringify(result.categories, null, 2));
+                  "
+
+            - name: Commit updated scores
+              run: |
+                  git config user.name "github-actions[bot]"
+                  git config user.email "github-actions[bot]@users.noreply.github.com"
+                  git add src/_data/lighthouseScores.json
+                  git diff --cached --quiet && echo "No changes" && exit 0
+                  git commit -m "chore: update lighthouse scores"
+                  git push

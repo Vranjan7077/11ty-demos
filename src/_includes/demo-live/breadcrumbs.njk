@@ -1,0 +1,9 @@
+{% import "components/breadcrumbs.njk" as bcC %}
+<p>This is the exact component rendered at the top of this very page, shown again standalone:</p>
+<div class="demo__live-widget">
+  {{ bcC.breadcrumbs([
+    { text: "Home", url: "/" },
+    { text: "Demos", url: "/demos/" },
+    { text: "Breadcrumbs" }
+  ]) }}
+</div>

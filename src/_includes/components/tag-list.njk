@@ -1,0 +1,9 @@
+{% macro tagList(tags) %}
+<ul class="tag-list">
+  {% for tag in tags %}
+    {% if tag != "demo" and tag != "post" %}
+    <li><a class="tag-pill" href="/demos/tags/{{ tag | slugify }}/">{{ tag }}</a></li>
+    {% endif %}
+  {% endfor %}
+</ul>
+{% endmacro %}

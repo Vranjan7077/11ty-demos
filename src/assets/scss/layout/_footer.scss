@@ -1,0 +1,27 @@
+.site-footer {
+    border-top: 1px solid var(--color-border);
+    margin-top: var(--space-2xl);
+    padding-block: var(--space-lg);
+    color: var(--color-fg-muted);
+}
+
+.site-footer__inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    justify-content: space-between;
+    align-items: center;
+}
+
+.site-footer__links {
+    display: flex;
+    gap: var(--space-sm);
+}
+
+.site-footer__links a {
+    text-decoration: none;
+}
+
+.site-footer__links a:hover {
+    text-decoration: underline;
+}

@@ -1,0 +1,20 @@
+{% macro paginationNav(prev, next) %}
+<nav class="pagination-nav" aria-label="Demo pagination">
+  <div class="pagination-nav__side pagination-nav__side--prev">
+    {% if prev %}
+    <a href="{{ prev.url }}">
+      <span class="pagination-nav__label">← Previous</span>
+      <span class="pagination-nav__title">{{ prev.data.title }}</span>
+    </a>
+    {% endif %}
+  </div>
+  <div class="pagination-nav__side pagination-nav__side--next">
+    {% if next %}
+    <a href="{{ next.url }}">
+      <span class="pagination-nav__label">Next →</span>
+      <span class="pagination-nav__title">{{ next.data.title }}</span>
+    </a>
+    {% endif %}
+  </div>
+</nav>
+{% endmacro %}

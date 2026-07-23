@@ -1,0 +1,25 @@
+<header class="site-header">
+  <div class="wrapper site-header__inner">
+    <a class="site-header__logo" href="/">
+      <span class="site-header__mark" aria-hidden="true">&lt;/&gt;</span>
+      {{ site.shortTitle }}
+    </a>
+
+    {% include "components/nav-primary.njk" %}
+
+    <div class="site-header__tools">
+      {% include "components/search-bar.njk" %}
+      {% include "components/theme-toggle.njk" %}
+      <button
+        type="button"
+        class="nav-toggle"
+        aria-expanded="false"
+        aria-controls="primary-nav"
+        data-nav-toggle
+      >
+        <span class="visually-hidden">Menu</span>
+        <span class="nav-toggle__bars" aria-hidden="true"></span>
+      </button>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,31 @@
+---
+pagination:
+  data: collections.demoTags
+  size: 1
+  alias: tag
+permalink: "/demos/tags/{{ tag | slugify }}/"
+eleventyExcludeFromCollections: true
+eleventyComputed:
+  title: "{{ tag }}"
+  description: "Every demo tagged “{{ tag }}”."
+---
+{% extends "layouts/base.njk" %}
+{% import "components/demo-card.njk" as demoCardC %}
+
+{% set matching = collections.demos | byTag(tag) %}
+
+{% block content %}
+<div class="wrapper">
+  <header class="page__header">
+    <p class="page__eyebrow"><a href="/demos/">← All demos</a></p>
+    <h1 class="page__title">Tag: {{ tag }}</h1>
+    <p class="page__lede">{{ matching.length | pluralize("demo") }} tagged “{{ tag }}”.</p>
+  </header>
+
+  <div class="demo-grid">
+    {% for demo in matching %}
+      {{ demoCardC.demoCard(demo) }}
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

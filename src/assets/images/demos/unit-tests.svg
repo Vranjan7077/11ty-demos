@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 225">
+  <rect width="400" height="225" fill="#12141d"/>
+  <text x="60" y="90" font-family="monospace" font-size="22" fill="#3ecb8f">✔ pluralize</text>
+  <text x="60" y="125" font-family="monospace" font-size="22" fill="#3ecb8f">✔ excerpt</text>
+  <text x="60" y="160" font-family="monospace" font-size="22" fill="#3ecb8f">✔ formatNumber</text>
+</svg>

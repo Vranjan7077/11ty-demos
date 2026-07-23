@@ -1,0 +1,23 @@
+{% macro pager(currentIndex, hrefs) %}
+{% if hrefs.length > 1 %}
+<nav class="pager" aria-label="Pagination">
+  <ol class="pager__list">
+    <li>
+      {% if currentIndex > 0 %}
+      <a class="pager__step" href="{{ hrefs[currentIndex - 1] }}">← Previous</a>
+      {% endif %}
+    </li>
+    {% for href in hrefs %}
+    <li>
+      <a href="{{ href }}" {% if loop.index0 == currentIndex %}aria-current="page"{% endif %}>{{ loop.index }}</a>
+    </li>
+    {% endfor %}
+    <li>
+      {% if currentIndex < hrefs.length - 1 %}
+      <a class="pager__step" href="{{ hrefs[currentIndex + 1] }}">Next →</a>
+      {% endif %}
+    </li>
+  </ol>
+</nav>
+{% endif %}
+{% endmacro %}

@@ -1,0 +1,16 @@
+{% extends "layouts/base.njk" %}
+
+{% block content %}
+<div class="wrapper page">
+  {% if title and not hideTitle %}
+  <header class="page__header">
+    <h1 class="page__title">{{ title }}</h1>
+    {% if description %}<p class="page__lede">{{ description }}</p>{% endif %}
+  </header>
+  {% endif %}
+
+  <div class="page__content">
+    {{ content | safe }}
+  </div>
+</div>
+{% endblock %}
