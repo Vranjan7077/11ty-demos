@@ -1,26 +1,26 @@
 {
-    "isFallback": false,
-    "categories": {
-        "performance": {
-            "score": "100",
-            "title": "Performance",
-            "grade": "good"
-        },
-        "accessibility": {
-            "score": "100",
-            "title": "Accessibility",
-            "grade": "good"
-        },
-        "best-practices": {
-            "score": "100",
-            "title": "Best Practices",
-            "grade": "good"
-        },
-        "seo": {
-            "score": "100",
-            "title": "SEO",
-            "grade": "good"
-        }
+  "isFallback": false,
+  "categories": {
+    "performance": {
+      "score": "100",
+      "title": "Performance",
+      "grade": "good"
     },
-    "fetchedAt": "2026-07-22T03:30:00.000Z"
+    "accessibility": {
+      "score": "96",
+      "title": "Accessibility",
+      "grade": "good"
+    },
+    "best-practices": {
+      "score": "100",
+      "title": "Best Practices",
+      "grade": "good"
+    },
+    "seo": {
+      "score": "100",
+      "title": "SEO",
+      "grade": "good"
+    }
+  },
+  "fetchedAt": "2026-07-26T05:17:04.439Z"
 }
