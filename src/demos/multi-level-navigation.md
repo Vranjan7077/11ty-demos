@@ -26,7 +26,7 @@ eleventyNavigation:
 
 The `@11ty/eleventy-navigation` plugin scans `collections.all`, builds a tree out of those `key`/`parent`/`order` relationships, and hands it back through a filter: `collections.all | eleventyNavigation`. The `nav-primary.njk` component renders that tree with one recursive macro, so it calls itself whenever an entry has children. That means you can nest as deep as you want without writing any extra template code.
 
-This very page is one of the four children under **Demos** in the header. Open the menu and you'll see the rest.
+This very page is one of the four children under **Demos**. The header only shows the top level, so the full tree is rendered below in the Live Implementation, using the same component with a `navStandalone` flag that lets it render children.
 
 ## Folder Structure
 

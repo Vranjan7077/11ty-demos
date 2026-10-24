@@ -1,5 +1,5 @@
 {% import "components/pager.njk" as pagerC %}
-{% set pageSize = 3 %}
+{% set pageSize = site.blogPageSize %}
 {% set totalPages = (collections.posts.length / pageSize) | round(0, "ceil") %}
 {%- set hrefs = [] -%}
 {%- for i in range(0, totalPages) -%}

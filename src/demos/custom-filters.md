@@ -26,7 +26,7 @@ Four more live below, same mechanism, different jobs:
 
 - `excerpt` trims text to a word count — it's the filter actually capping the descriptions on the [demos listing](/demos/), so one long sentence can't stretch a card taller than its neighbors.
 - `formatNumber` adds thousands separators to a number.
-- `timeAgo` turns a date into "3 months ago" — it reuses `pluralize` internally for the unit word, rather than re-deriving the same singular/plural logic twice.
+- `timeAgo` turns a date into "3 months ago" — it reuses `pluralize` internally for the unit word, rather than re-deriving the same singular/plural logic twice. It's also the one filter here that can't _only_ run at build time: "3 days ago" is true on build day and wrong a month later. So the same file is bundled into the browser script too, and refreshes those labels on page load.
 - `absoluteUrl` isn't hand-written at all. It ships with `@11ty/eleventy-plugin-rss` and is what turns every relative link into a real, absolute one in this site's actual [RSS feed](/feed.xml). A filter doesn't have to come from `src/_11ty/filters/` to work exactly the same way from a template's point of view.
 
 ## Folder Structure
@@ -36,10 +36,11 @@ src/_11ty/registerFromGlob.js       ← scans the folder, calls addFilter(name, 
 src/_11ty/filters/pluralize.js      ← used on real tag pages
 src/_11ty/filters/excerpt.js        ← used on real demo card descriptions
 src/_11ty/filters/formatNumber.js
-src/_11ty/filters/timeAgo.js        ← used on the real blog listing, imports pluralize.js directly
+src/_11ty/filters/timeAgo.js        ← imports pluralize.js directly; also bundled for the browser
+src/assets/js/time-ago.js           ← re-runs timeAgo client-side so labels never go stale
 src/tags.njk                        ← where pluralize replaced hand-written singular/plural logic
 src/_includes/components/demo-card.njk ← where excerpt caps description length
-src/blog.njk                        ← where timeAgo is used for real
+src/blog.njk                        ← where the blog listing marks dates for time-ago.js
 ```
 
 ## Important Files
@@ -54,4 +55,4 @@ src/blog.njk                        ← where timeAgo is used for real
 
 - The filename is the filter name. Renaming `pluralize.js` to something else changes what you'd type on the right-hand side of every `|` that uses it — same "filename is the contract" rule as {% demoLink "data-files", "Data Files" %}.
 - Nunjucks filters have to be synchronous, which is why these are all plain functions — Eleventy's async-filter support exists, but `registerFromGlob` here always calls the plain `addFilter`, so an `async function` in this folder wouldn't be awaited correctly.
-- `timeAgo` importing `pluralize.js` directly (not through the Nunjucks filter pipeline) works because they're both just plain JavaScript files — `registerFromGlob` registering one as a filter doesn't stop the other from importing it normally.
+- `timeAgo` importing `pluralize.js` directly (not through the Nunjucks filter pipeline) works because they're both just plain JavaScript files — `registerFromGlob` registering one as a filter doesn't stop the other from importing it normally. The same reason lets esbuild bundle both into the browser script: a filter with no Node-only imports is just a function that runs anywhere.

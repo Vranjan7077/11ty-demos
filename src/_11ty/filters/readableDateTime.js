@@ -1,0 +1,12 @@
+export default function readableDateTime(dateObj) {
+    return new Intl.DateTimeFormat("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        hourCycle: "h23",
+        timeZone: "UTC",
+        timeZoneName: "short",
+    }).format(new Date(dateObj));
+}

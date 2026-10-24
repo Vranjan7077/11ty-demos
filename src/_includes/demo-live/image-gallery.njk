@@ -1,6 +1,11 @@
+{% import "components/lightbox-gallery.njk" as lightboxC %}
+{% if imageGalleryDemo.source == "pexels" %}
 <p>Six real photos fetched live from Pexels, each resized to two widths and encoded as WebP and JPEG, laid out in a plain CSS grid:</p>
-<div class="image-gallery">
-  {% for item in imageGalleryDemo %}
-  <div class="image-gallery__item">{{ item | safe }}</div>
+{% else %}
+<p>Pexels photos weren't available for this build (usually a missing <code>PEXELS_API_KEY</code>), so these are the local placeholder gradients. They go through exactly the same pipeline: resized to two widths, encoded as WebP and JPEG, laid out in a plain CSS grid:</p>
+{% endif %}
+<div class="image-gallery" data-lightbox-gallery>
+  {% for item in imageGalleryDemo.items %}
+  {{ lightboxC.lightboxItem(item, "image-gallery__item") }}
   {% endfor %}
 </div>

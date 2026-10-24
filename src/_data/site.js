@@ -8,5 +8,8 @@ export default {
         name: "Vinay Ranjan",
         url: "https://vranjan.dev/",
     },
+    repoUrl: "https://github.com/Vranjan7077/11ty-demos",
+    repoBranch: "master",
+    blogPageSize: 3,
     year: new Date().getFullYear(),
 };

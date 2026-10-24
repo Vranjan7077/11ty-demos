@@ -170,3 +170,11 @@
     min-width: auto;
     padding-inline: var(--space-sm);
 }
+
+.draft-banner {
+    margin-block: var(--space-sm);
+    padding: var(--space-2xs) var(--space-sm);
+    border: var(--border-thick) dashed var(--color-fg);
+    background: var(--color-bg-raised);
+    font-size: 0.95rem;
+}

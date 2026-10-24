@@ -1,9 +1,12 @@
 import { run } from "node:test";
-import path from "node:path";
+import fastGlob from "fast-glob";
+import { fingerprintFiles } from "../_11ty/fingerprint.js";
 
-export default async function () {
-    const testFile = path.resolve(process.cwd(), "test/filters.test.js");
-    const stream = run({ files: [testFile] });
+const TESTED_SOURCES = ["test/*.test.js", "src/_11ty/**/*.js", "src/_data/site.js", "netlify/lib/**/*.js"];
+
+async function runTests() {
+    const testFiles = await fastGlob("test/*.test.js", { absolute: true });
+    const stream = run({ files: testFiles.sort(), concurrency: true });
 
     let pass = 0;
     let fail = 0;
@@ -21,4 +24,20 @@ export default async function () {
     }
 
     return { pass, fail, total: pass + fail, results };
+}
+
+export default async function () {
+    if (process.env.ELEVENTY_RUN_MODE === "build") {
+        return runTests();
+    }
+
+    const fingerprint = fingerprintFiles(TESTED_SOURCES);
+    const cached = globalThis.testResultsCache;
+    if (cached?.fingerprint === fingerprint) {
+        return cached.results;
+    }
+
+    const results = await runTests();
+    globalThis.testResultsCache = { fingerprint, results };
+    return results;
 }

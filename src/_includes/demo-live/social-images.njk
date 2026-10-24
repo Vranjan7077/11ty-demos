@@ -1,0 +1,17 @@
+{% set newestPost = collections.posts[0] %}
+{% set firstDemo = collections.demos[0] %}
+<p>This is the exact image a link to this page shows on LinkedIn, X, Slack, or Discord. It was drawn while this page was built, from the same title, description, and thumbnail you see above:</p>
+<figure class="og-card">
+  <img src="{{ title | ogImageUrl(description, difficulty + ' demo', thumbnail) }}" alt="Social card for this page: {{ title }}" width="1200" height="630" loading="lazy" decoding="async" eleventy:ignore>
+</figure>
+<p>Every other page gets its own, from the same template. The newest blog post, and the first demo on the list:</p>
+<div class="og-card-grid">
+  <figure class="og-card">
+    <img src="{{ newestPost.data.title | ogImageUrl(newestPost.data.description, 'Blog post') }}" alt="Social card for “{{ newestPost.data.title }}”" width="1200" height="630" loading="lazy" decoding="async" eleventy:ignore>
+    <figcaption><a href="{{ newestPost.url }}">{{ newestPost.data.title }}</a></figcaption>
+  </figure>
+  <figure class="og-card">
+    <img src="{{ firstDemo.data.title | ogImageUrl(firstDemo.data.description, firstDemo.data.difficulty + ' demo', firstDemo.data.thumbnail) }}" alt="Social card for “{{ firstDemo.data.title }}”" width="1200" height="630" loading="lazy" decoding="async" eleventy:ignore>
+    <figcaption><a href="{{ firstDemo.url }}">{{ firstDemo.data.title }}</a></figcaption>
+  </figure>
+</div>

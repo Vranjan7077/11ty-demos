@@ -1,0 +1,23 @@
+name: Scheduled Netlify Rebuild
+
+on:
+    schedule:
+        - cron: "30 1 * * *"
+    workflow_dispatch:
+
+permissions: {}
+
+jobs:
+    rebuild:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Trigger the Netlify build hook
+              env:
+                  NETLIFY_BUILD_HOOK_URL: ${{ secrets.NETLIFY_BUILD_HOOK_URL }}
+              run: |
+                  if [ -z "$NETLIFY_BUILD_HOOK_URL" ]; then
+                    echo "::warning::NETLIFY_BUILD_HOOK_URL is not set, so no rebuild was triggered. Create a build hook in Netlify (Site configuration > Build & deploy > Build hooks) and add its URL as a repository secret."
+                    exit 0
+                  fi
+                  curl -sf -X POST -d '{}' "${NETLIFY_BUILD_HOOK_URL}?trigger_title=Scheduled+daily+rebuild"
+                  echo "Rebuild triggered."

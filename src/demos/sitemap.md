@@ -25,7 +25,7 @@ The obvious version of a sitemap is a loop over `collections.all`. That's where 
 
 {% endraw %}
 
-The {% demoLink "pagination", "blog's paginated pages" %} (`/blog/2/`, `/blog/3/`) have the identical problem, fixed the identical way — reconstructed from a hardcoded page size matching the real pagination config.
+The {% demoLink "pagination", "blog's paginated pages" %} (`/blog/2/`, `/blog/3/`) have the identical problem, fixed the identical way — reconstructed from `site.blogPageSize`, the same value the real pagination config reads.
 
 **Gotcha two: a phantom URL that isn't a page at all.** This site's custom Sass build extension returns `undefined` for any `_partial.scss` file, since partials don't produce their own output. Eleventy still registers a `.css`-suffixed entry for it in `collections.all` anyway — a URL for a file that's never actually written. The fix is a one-line filter, since every _real_ page URL on this site ends in a trailing slash and no phantom entry does:
 
@@ -50,4 +50,5 @@ src/sitemap.njk ← the whole thing, one file
 ## Notes
 
 - Both bugs were caught by comparing the sitemap's URL count against the real number of built HTML files, not by reading the template and assuming it was right. It wasn't, twice.
-- The blog page-size number in this file is hardcoded to match `blog.njk`'s real `pagination.size`. If that ever changes, this file has to change with it — there's no automatic link between the two.
+- The blog page size used to be hardcoded here to match `blog.njk`'s `pagination.size`, with nothing keeping the two in step. Both now read `site.blogPageSize`, and a build smoke test compares the sitemap's blog pages against the pages actually built, so they can't drift apart silently.
+- Demo pages use their last git commit date for `<lastmod>`, so the sitemap tells search engines when a demo actually changed, not just when it was first published.

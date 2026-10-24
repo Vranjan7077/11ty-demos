@@ -16,9 +16,14 @@ const languageByExtension = {
 export default function codeFile(filePath, start, end) {
     const absPath = path.join(process.cwd(), filePath);
     const raw = fs.readFileSync(absPath, "utf8");
-    let lines = raw.split("\n");
+    let lines = raw.split(/\r?\n/);
 
-    if (start) {
+    if (typeof start === "string") {
+        lines = lines.filter((line) => line.includes(start));
+        if (!lines.length) {
+            throw new Error(`codeFile: no line in ${filePath} contains "${start}"`);
+        }
+    } else if (start) {
         const from = start - 1;
         const to = end || start;
         lines = lines.slice(from, to);

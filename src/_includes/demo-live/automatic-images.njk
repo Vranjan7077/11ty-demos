@@ -1,0 +1,23 @@
+<p>Both screenshots below are written into this page as a plain <code>&lt;img&gt;</code> pointing at a 2560×1600 PNG straight from the vranjan.dev redesign. Nothing else. View the page source to see what the build turned each one into.</p>
+<div class="auto-images">
+  {% for item in automaticImagesDemo %}
+  <figure class="auto-images__item">
+    <img src="{{ item.src }}" alt="{{ item.alt }}">
+    <figcaption>{{ item.label }}</figcaption>
+  </figure>
+  {% endfor %}
+</div>
+{% for item in automaticImagesDemo %}
+{% set webp960 = (item.outputs | selectattr("format", "equalto", "webp") | selectattr("width", "equalto", 960) | first) %}
+<table class="size-table">
+  <caption>{{ item.label }}: what this build wrote</caption>
+  <thead><tr><th scope="col">File</th><th scope="col">Width</th><th scope="col">Size</th></tr></thead>
+  <tbody>
+    <tr><td>Original PNG</td><td>2560px</td><td>{{ (item.originalBytes / 1024) | round(0) }} KB</td></tr>
+    {% for output in item.outputs %}
+    <tr><td>{{ output.format | upper }}</td><td>{{ output.width }}px</td><td>{{ (output.bytes / 1024) | round(0) }} KB</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% if webp960 %}<p>A typical laptop screen picks the 960px WebP: <b>{{ (webp960.bytes / 1024) | round(0) }} KB instead of {{ (item.originalBytes / 1024) | round(0) }} KB</b>, {{ (100 - webp960.bytes / item.originalBytes * 100) | round(0) }}% less to download.</p>{% endif %}
+{% endfor %}

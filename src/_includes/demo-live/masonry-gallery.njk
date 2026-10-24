@@ -1,6 +1,11 @@
+{% import "components/lightbox-gallery.njk" as lightboxC %}
+{% if masonryGalleryDemo.source == "pexels" %}
 <p>Six real architecture photos fetched live from Pexels, each keeping its own natural height, arranged with plain CSS multi-column layout — no JavaScript, no masonry library:</p>
-<div class="masonry-gallery">
-  {% for item in masonryGalleryDemo %}
-  <div class="masonry-gallery__item">{{ item | safe }}</div>
+{% else %}
+<p>Pexels photos weren't available for this build (usually a missing <code>PEXELS_API_KEY</code>), so these are the local placeholder gradients, each a different height, arranged with plain CSS multi-column layout — no JavaScript, no masonry library:</p>
+{% endif %}
+<div class="masonry-gallery" data-lightbox-gallery>
+  {% for item in masonryGalleryDemo.items %}
+  {{ lightboxC.lightboxItem(item, "masonry-gallery__item") }}
   {% endfor %}
 </div>

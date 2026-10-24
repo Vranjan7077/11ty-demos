@@ -51,6 +51,8 @@ src/_includes/components/lighthouse-scores.njk   ← the badge macro
 
 ## Notes
 
-- The scores above are genuinely real — captured from a full local Lighthouse audit of this site during development, not placeholder numbers. Once this repo is deployed and the weekly Action has run at least once against the live URL, they'll refresh automatically.
+- The scores above come from Google's PageSpeed Insights running against the live site, mobile strategy, fetched by the Action every Sunday. "Last refreshed" is the moment that run happened, and the relative time next to it is worked out in your browser, so it can't go stale between builds.
 - This needs a `PAGESPEED_API_KEY` repository secret to actually run. Without it, the Action fails loudly (`exit 1`) rather than silently leaving stale data.
-- This runs on its own weekly schedule, completely independent of when the site itself gets rebuilt or deployed. A deploy doesn't refresh the scores, and a scheduled score refresh doesn't trigger a deploy on its own (it does trigger a rebuild, since Netlify watches the repo and this workflow pushes a commit).
+- Each run writes a new `fetchedAt`, so it always commits, and Netlify deploys that commit like any other push. Commits made with the workflow's own `GITHUB_TOKEN` don't start other GitHub workflows, so the commit can't set off a chain of runs.
+- The JSON is written with four-space indentation and a trailing newline, exactly what Prettier would produce, so the bot's commits never fail the formatting check in CI.
+- Refreshing the scores is separate from {% demoLink "scheduled-rebuilds", "Scheduled Rebuilds" %}: the daily rebuild refreshes everything else fetched at build time, but only this weekly job asks PageSpeed for new numbers.

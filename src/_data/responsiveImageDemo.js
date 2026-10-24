@@ -13,5 +13,6 @@ export default async function () {
         sizes: "(min-width: 40rem) 20rem, 90vw",
         loading: "lazy",
         decoding: "async",
+        "eleventy:ignore": "",
     });
 }

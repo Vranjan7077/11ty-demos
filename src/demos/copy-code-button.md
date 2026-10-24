@@ -37,6 +37,8 @@ setTimeout(() => {
 }, 2000);
 ```
 
+A sighted user sees the checkmark; a screen reader user hears "Code copied to clipboard" from a single visually hidden `role="status"` region the script adds to the page. If the copy is refused (some browsers block clipboard access in certain contexts), the region says so instead of failing silently. Clicking again within the two seconds restarts the timer rather than stacking a second one.
+
 If `navigator.clipboard` doesn't exist — an old browser, or a page loaded over plain HTTP instead of HTTPS — the whole script does nothing, on purpose. No button ever appears that wouldn't actually work.
 
 ## Folder Structure

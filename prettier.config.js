@@ -5,4 +5,5 @@ export default {
     semi: true,
     singleQuote: false,
     bracketSpacing: true,
+    endOfLine: "auto",
 };

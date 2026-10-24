@@ -1,0 +1,11 @@
+@font-face {
+    font-family: "Hanken Grotesk";
+    src: url("/assets/fonts/HankenGrotesk-Variable.woff2") format("woff2");
+    font-weight: 400 700;
+    font-style: normal;
+    font-display: optional;
+}
+
+:root.font-fallback {
+    --font-sans: var(--font-system);
+}

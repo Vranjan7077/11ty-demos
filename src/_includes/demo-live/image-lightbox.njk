@@ -1,0 +1,8 @@
+{% import "components/lightbox-gallery.njk" as lightboxC %}
+<p>Click any photo. Use the arrow keys or the buttons to move between them, and <kbd>Esc</kbd>, the × button, or a click on the dark backdrop to close. The same lightbox is switched on in the {% demoLink "image-gallery", "Image Gallery" %} and {% demoLink "masonry-gallery", "Masonry Gallery" %} demos.</p>
+<div class="image-gallery" data-lightbox-gallery>
+  {% for item in imageGalleryDemo.items %}
+  {{ lightboxC.lightboxItem(item, "image-gallery__item") }}
+  {% endfor %}
+</div>
+<noscript><p>With JavaScript off, each photo is a plain link that opens the full-size image.</p></noscript>

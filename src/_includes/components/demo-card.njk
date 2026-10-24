@@ -1,14 +1,19 @@
 {% import "components/tag-list.njk" as tagListC %}
 {% import "components/difficulty-badge.njk" as badgeC %}
 
-{% macro demoCard(demo) %}
-<article class="demo-card">
+{% macro demoCard(demo, eager=false) %}
+<article
+  class="demo-card"
+  data-demo-card
+  data-tags="{% for tag in demo.data.tags %}{% if tag != 'demo' %}{{ tag | slugify }} {% endif %}{% endfor %}"
+  data-difficulty="{{ (demo.data.difficulty or '') | lower }}"
+>
   <div class="demo-card__thumb-link">
     <img
       class="demo-card__thumb"
       src="{{ demo.data.thumbnail or '/assets/images/demos/placeholder.svg' }}"
       alt=""
-      loading="lazy"
+      loading="{{ "eager" if eager else "lazy" }}"
       width="400"
       height="225"
     >

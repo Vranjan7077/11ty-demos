@@ -1,7 +1,9 @@
 {
     "layout": "layouts/demo.njk",
     "tags": ["demo"],
+    "ogType": "article",
     "eleventyComputed": {
-        "permalink": "/demos/{{ page.fileSlug }}/"
+        "permalink": "/demos/{{ page.fileSlug }}/",
+        "lastUpdated": "{{ page.inputPath | gitLastModified(demoBlock) }}"
     }
 }

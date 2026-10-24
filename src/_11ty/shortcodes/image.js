@@ -17,5 +17,6 @@ export default async function image(src, alt, sizes = "100vw") {
         sizes,
         loading: "lazy",
         decoding: "async",
+        "eleventy:ignore": "",
     });
 }

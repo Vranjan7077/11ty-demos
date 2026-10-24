@@ -8,7 +8,9 @@ eleventyExcludeFromCollections: true
   {%- if entry.url and entry.url.endsWith("/") %}
   <url>
     <loc>{{ site.url }}{{ entry.url }}</loc>
-    {%- if entry.date %}
+    {%- if entry.data.lastUpdated %}
+    <lastmod>{{ entry.data.lastUpdated }}</lastmod>
+    {%- elif entry.date %}
     <lastmod>{{ entry.date | htmlDateString }}</lastmod>
     {%- endif %}
   </url>
@@ -19,8 +21,7 @@ eleventyExcludeFromCollections: true
     <loc>{{ site.url }}/demos/tags/{{ tag | slugify }}/</loc>
   </url>
 {%- endfor %}
-{%- set blogPageSize = 3 -%}
-{%- set totalBlogPages = (collections.posts.length / blogPageSize) | round(0, "ceil") -%}
+{%- set totalBlogPages = (collections.posts.length / site.blogPageSize) | round(0, "ceil") -%}
 {%- for i in range(1, totalBlogPages) %}
   <url>
     <loc>{{ site.url }}/blog/{{ i + 1 }}/</loc>

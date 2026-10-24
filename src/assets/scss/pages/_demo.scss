@@ -39,6 +39,16 @@
 
 .demo__live-widget--nav {
     display: block;
+
+    .primary-nav {
+        display: block;
+        margin: 0;
+    }
+
+    .primary-nav__list {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 }
 
 .demo__live-list {
@@ -71,6 +81,12 @@
 
 .demo__content ol {
     list-style: decimal;
+}
+
+.demo__source {
+    margin-top: var(--space-lg);
+    font-size: 0.9rem;
+    color: var(--color-fg-muted);
 }
 
 .demo__related {

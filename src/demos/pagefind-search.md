@@ -22,6 +22,8 @@ The [Search demo](/demos/search/) on this site is a small hand-rolled index of t
 
 That's the whole setup. `pagefind --site public` walks the built `public/` folder, builds a compact search index out of it, and drops the index plus a ready-made search widget into `public/pagefind/`. The box above is that exact widget, `PagefindUI`, pointed at a container div, with a few CSS variables overridden to match this site's look.
 
+The widget script loads with `defer`, so it never blocks the page from rendering, and the setup code is an inline `type="module"` script. Module scripts and `defer` scripts run in document order once the page has parsed, so `PagefindUI` is guaranteed to exist by the time the setup runs. If the index hasn't been built (a fresh `npm start`), the box says so instead of throwing an error.
+
 ## Folder Structure
 
 ```text

@@ -33,8 +33,8 @@ The photos themselves come from the same [Pexels API](https://www.pexels.com/api
 ## Folder Structure
 
 ```text
-src/_11ty/pexels.js                         ← shared Pexels fetch helper
-src/_data/masonryGalleryDemo.js             ← fetches portrait photos, processes each with eleventy-img
+src/_11ty/gallery.js                        ← shared with Image Gallery: fetch, fall back, process
+src/_data/masonryGalleryDemo.js             ← asks for portrait photos instead of the curated feed
 src/_includes/demo-live/masonry-gallery.njk ← the layout markup
 src/assets/scss/components/_gallery.scss    ← shared with the Image Gallery demo
 ```

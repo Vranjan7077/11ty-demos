@@ -15,6 +15,7 @@
   "description": description,
   "url": site.url + page.url,
   "datePublished": date | htmlDateString,
+  "dateModified": lastUpdated or (date | htmlDateString),
   "author": {
     "@type": "Person",
     "name": site.author.name,
@@ -25,19 +26,22 @@
 
 {% block content %}
 <script type="application/ld+json">{{ schema | jsonLd | safe }}</script>
-<article class="wrapper demo">
+<article class="wrapper demo" data-reading-position data-content-version="{{ content | shortHash }}">
+  {% include "components/resume-reading.njk" %}
   {{ bcC.breadcrumbs([
     { text: "Home", url: "/" },
     { text: "Demos", url: "/demos/" },
     { text: title }
   ]) }}
 
+  {% if draft %}<p class="draft-banner" role="note"><b>Draft.</b> This demo only appears in local and deploy-preview builds, never on the live site.</p>{% endif %}
+
   <header class="demo__hero">
     {% if difficulty %}{{ badgeC.difficultyBadge(difficulty) }}{% endif %}
     <h1 class="demo__title">{{ title }}</h1>
     <p class="demo__lede">{{ description }}</p>
     <div class="demo__meta">
-      <span class="demo__reading-time">{{ content | readingTime }} read</span>
+      <span class="demo__reading-time">{{ content | readingTime }} read{% if lastUpdated %} · Updated <time datetime="{{ lastUpdated }}">{{ lastUpdated | readableDate }}</time>{% endif %}</span>
       {{ tagListC.tagList(tags) }}
     </div>
   </header>
@@ -54,6 +58,12 @@
   <div class="demo__content">
     {{ content | safe }}
   </div>
+
+  <p class="demo__source">
+    Source on GitHub:
+    <a href="{{ page.inputPath | repoUrl }}">this page</a>
+    {%- if demoBlock %} · <a href="{{ ('src/_includes/' + demoBlock) | repoUrl }}">live implementation</a>{% endif %}
+  </p>
 
   {% if related.length %}
   <section class="demo__related" aria-labelledby="related-demos">
