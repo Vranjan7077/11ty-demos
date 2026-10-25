@@ -26,3 +26,147 @@
     display: block;
     border: var(--border-thick) solid var(--color-fg);
 }
+
+.og-card {
+    margin: 0;
+}
+
+.og-card img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: var(--border-thick) solid var(--color-fg);
+}
+
+.og-card figcaption {
+    margin-top: var(--space-3xs);
+    font-size: 0.9rem;
+}
+
+.og-card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+    gap: var(--space-md);
+}
+
+.auto-images {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    gap: var(--space-md);
+    margin-block: var(--space-md);
+}
+
+.auto-images__item {
+    margin: 0;
+}
+
+.auto-images__item img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: var(--border-thick) solid var(--color-fg);
+}
+
+.size-table {
+    width: 100%;
+    margin-block: var(--space-sm);
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.size-table caption {
+    text-align: left;
+    font-weight: 700;
+    padding-bottom: var(--space-3xs);
+}
+
+.size-table th,
+.size-table td {
+    padding: var(--space-3xs) var(--space-2xs);
+    border-bottom: 1px solid var(--color-border);
+    text-align: left;
+}
+
+.size-table td:last-child,
+.size-table th:last-child {
+    text-align: right;
+}
+
+.lightbox-link {
+    display: block;
+    cursor: zoom-in;
+}
+
+.lightbox {
+    width: min(100% - 2 * var(--space-sm), 64rem);
+    max-width: none;
+    max-height: calc(100dvh - 2 * var(--space-sm));
+    margin: auto;
+    padding: var(--space-lg) var(--space-xl);
+    border: var(--border-thick) solid var(--color-fg);
+    background: var(--color-bg);
+    color: var(--color-fg);
+    box-shadow: var(--shadow-hard);
+}
+
+.lightbox::backdrop {
+    background: rgb(0 0 0 / 0.8);
+}
+
+.lightbox__figure {
+    margin: 0;
+}
+
+.lightbox__image {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: calc(100dvh - 12rem);
+    margin-inline: auto;
+}
+
+.lightbox__caption,
+.lightbox__counter {
+    margin-top: var(--space-2xs);
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--color-fg-muted);
+}
+
+.lightbox__button {
+    position: absolute;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: var(--radius-sm);
+    font-size: 1.75rem;
+    line-height: 1;
+    color: var(--color-fg);
+}
+
+.lightbox__button:hover {
+    background: var(--color-bg-raised);
+}
+
+.lightbox__button[hidden] {
+    display: none;
+}
+
+.lightbox__button--close {
+    top: var(--space-3xs);
+    right: var(--space-3xs);
+}
+
+.lightbox__button--prev,
+.lightbox__button--next {
+    top: 50%;
+    translate: 0 -50%;
+}
+
+.lightbox__button--prev {
+    left: var(--space-3xs);
+}
+
+.lightbox__button--next {
+    right: var(--space-3xs);
+}

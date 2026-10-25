@@ -49,7 +49,7 @@ Clicking the toggle button runs a handler in `main.js` that flips the attribute 
 ```text
 src/
   _includes/
-    layouts/base.njk               ← inline anti-FOUC script
+    components/preferences-init.njk ← inline anti-FOUC script, included in base.njk's <head>
     components/theme-toggle.njk    ← the button + icons
   assets/
     scss/base/_theme.scss          ← the two token sets
@@ -65,5 +65,5 @@ src/
 ## Notes
 
 - Follows your OS setting until you pick a theme yourself, then remembers that instead.
-- The toggle is a real `<button>`, not a checkbox dressed up to look like one, so screen readers announce it correctly with `aria-label`.
+- The toggle is a real `<button>`, not a checkbox dressed up to look like one. It's a toggle button in the ARIA sense: its name stays "Dark theme" and `aria-pressed` says whether that's on, so a screen reader announces "Dark theme, toggle button, pressed". `main.js` keeps `aria-pressed` in sync on load and on every click, including on this page, where there are two toggles.
 - Since it's all CSS variables, adding a third theme (like "high contrast") is just another `[data-theme="..."]` block.

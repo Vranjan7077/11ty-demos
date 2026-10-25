@@ -5,6 +5,13 @@ on:
         - cron: "0 0 * * 0"
     workflow_dispatch:
 
+permissions:
+    contents: read
+
+concurrency:
+    group: update-lighthouse-scores
+    cancel-in-progress: false
+
 jobs:
     update-scores:
         runs-on: ubuntu-latest
@@ -15,7 +22,7 @@ jobs:
 
             - uses: actions/setup-node@v5
               with:
-                  node-version: 20
+                  node-version-file: .nvmrc
 
             - name: Fetch PageSpeed scores
               env:
@@ -60,7 +67,7 @@ jobs:
                       };
                     }
                     result.fetchedAt = new Date().toISOString();
-                    fs.writeFileSync('src/_data/lighthouseScores.json', JSON.stringify(result, null, 2));
+                    fs.writeFileSync('src/_data/lighthouseScores.json', JSON.stringify(result, null, 4) + '\n');
                     console.log('Scores updated:', JSON.stringify(result.categories, null, 2));
                   "
 

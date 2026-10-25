@@ -1,0 +1,6 @@
+<p>These are the exact URLs this page loaded its stylesheet and script from. The <code>v</code> is a hash of what's inside each file, computed during this build:</p>
+<dl class="data-files-demo">
+  <div class="data-files-demo__row"><dt>Stylesheet</dt><dd><code>{{ '/assets/scss/main.css' | assetUrl }}</code></dd></div>
+  <div class="data-files-demo__row"><dt>Script</dt><dd><code>{{ '/assets/js/main.js' | assetUrl }}</code></dd></div>
+</dl>
+<p>Change one line of SCSS or JavaScript, rebuild, and the matching hash changes. Every page then points at a URL no browser has cached yet. Change nothing, and the hash stays the same, so returning visitors keep using their cached copy without asking the server again.</p>

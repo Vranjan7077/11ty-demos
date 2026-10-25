@@ -28,9 +28,31 @@ eleventyNavigation:
     <p class="page__lede">{{ description }}</p>
   </header>
 
+  <form class="demo-filter" data-demo-filter>
+    <div class="form-field">
+      <label for="demo-filter-tag">Tag</label>
+      <select id="demo-filter-tag" name="tag">
+        <option value="">All tags</option>
+        {% for tag in collections.demoTags %}
+        <option value="{{ tag | slugify }}">{{ tag }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-field">
+      <label for="demo-filter-difficulty">Difficulty</label>
+      <select id="demo-filter-difficulty" name="difficulty">
+        <option value="">Any difficulty</option>
+        <option value="beginner">Beginner</option>
+        <option value="intermediate">Intermediate</option>
+        <option value="advanced">Advanced</option>
+      </select>
+    </div>
+    <p class="demo-filter__status" role="status" data-demo-filter-status>Showing {{ collections.demos.length }} of {{ collections.demos.length }} demos</p>
+  </form>
+
   <div class="demo-grid">
     {% for demo in collections.demos %}
-      {{ demoCardC.demoCard(demo) }}
+      {{ demoCardC.demoCard(demo, loop.index0 < 3) }}
     {% endfor %}
   </div>
 </div>

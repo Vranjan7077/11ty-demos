@@ -1,6 +1,7 @@
 @use "../abstracts/variables" as v;
 
 :root {
+    --font-system: #{v.$font-system};
     --font-sans: #{v.$font-sans};
     --font-mono: #{v.$font-mono};
 
@@ -28,7 +29,7 @@
     --color-accent-strong: #4351db;
     --color-accent-contrast: #ffffff;
 
-    --color-block-hero: #5b6bff;
+    --color-block-hero: #4a5af0;
     --color-block-hero-fg: #ffffff;
     --color-beginner: #7ee8b8;
     --color-intermediate: #ffd66b;

@@ -23,6 +23,7 @@ difficulty: "Intermediate" # Beginner | Intermediate | Advanced
 thumbnail: /assets/images/demos/your-demo-title.svg
 order: 90 # optional; controls listing order
 demoBlock: "demo-live/your-demo-title.njk" # optional; a live, working example
+draft: true # optional; keeps it off the live site until you remove this line
 ---
 ```
 
@@ -34,5 +35,6 @@ That's it. The new demo:
 - Is included in `/search-index.json`, and therefore in the header search.
 - Slots into Previous/Next navigation based on its `order` (or title, if `order` is omitted).
 - Shows up in other demos' "Related Demos" sections if it shares tags with them.
+- Gets its own social share card, drawn from its title, description, and thumbnail.
 
-No other file needs to change.
+No other file needs to change. Just make sure the thumbnail file exists — if it doesn't, the build stops and tells you which path it couldn't find.

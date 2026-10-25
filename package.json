@@ -17,7 +17,7 @@
         "url": "https://github.com/Vranjan7077/11ty-demos/issues"
     },
     "engines": {
-        "node": ">=20"
+        "node": ">=24"
     },
     "keywords": [
         "eleventy",
@@ -29,29 +29,27 @@
     ],
     "scripts": {
         "clean": "rimraf public",
-        "build": "run-s clean build:eleventy build:pagefind build:js",
+        "build": "npm run clean && eleventy && npm run build:pagefind",
         "build:eleventy": "eleventy",
         "build:pagefind": "pagefind --site public",
-        "build:js": "run-p build:js:main build:js:search build:js:toc build:js:view-counter build:js:copy-code",
-        "build:js:main": "terser src/assets/js/main.js -c -m -o public/assets/js/main.js",
-        "build:js:search": "terser src/assets/js/search.js -c -m -o public/assets/js/search.js",
-        "build:js:toc": "terser src/assets/js/toc.js -c -m -o public/assets/js/toc.js",
-        "build:js:view-counter": "terser src/assets/js/view-counter.js -c -m -o public/assets/js/view-counter.js",
-        "build:js:copy-code": "terser src/assets/js/copy-code.js -c -m -o public/assets/js/copy-code.js",
         "start": "eleventy --serve",
         "debug": "cross-env DEBUG=Eleventy* eleventy",
-        "test": "node --test",
+        "test": "node --test \"test/*.test.js\"",
         "lint": "eslint .",
         "format": "prettier --write \"**/*.{js,scss,json,md}\"",
-        "format:check": "prettier --check \"**/*.{js,scss,json,md}\""
+        "format:check": "prettier --check \"**/*.{js,scss,json,md}\"",
+        "test:smoke": "node --test \"test/smoke/*.test.js\"",
+        "check": "npm run lint && npm run format:check && npm test && npm run build && npm run test:smoke"
     },
     "dependencies": {
         "@11ty/eleventy": "^3.1.2",
-        "@11ty/eleventy-img": "^6.0.4",
+        "@11ty/eleventy-fetch": "^6.0.1",
+        "@11ty/eleventy-img": "^7.1.1",
         "@11ty/eleventy-navigation": "^1.0.4",
         "@11ty/eleventy-plugin-rss": "^2.0.4",
         "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.1",
         "@netlify/blobs": "^10.7.9",
+        "@resvg/resvg-js": "^2.6.2",
         "dotenv": "^17.4.2",
         "eleventy-plugin-reading-time": "^0.0.1",
         "fast-glob": "^3.3.3",
@@ -62,12 +60,11 @@
     "devDependencies": {
         "@eslint/js": "^10.0.1",
         "cross-env": "^7.0.3",
+        "esbuild": "^0.28.2",
         "eslint": "^10.7.0",
         "globals": "^17.7.0",
-        "npm-run-all2": "^8.0.4",
         "pagefind": "^1.5.2",
         "prettier": "^3.9.6",
-        "rimraf": "^6.1.3",
-        "terser": "^5.49.0"
+        "rimraf": "^6.1.3"
     }
 }

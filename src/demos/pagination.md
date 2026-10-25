@@ -11,14 +11,19 @@ demoBlock: "demo-live/pagination.njk"
 
 ## How It Works
 
-Eleventy has pagination built in. Add a `pagination` block to a template's front matter and point it at any array (usually a collection), and Eleventy runs that template once per chunk, generating a separate page each time.
+Eleventy has pagination built in. Add a `pagination` block to a template's data and point it at any array (usually a collection), and Eleventy runs that template once per chunk, generating a separate page each time.
 
-```yaml
-pagination:
-    data: collections.posts
-    size: 3
-    alias: posts
+```js
+export default {
+    pagination: {
+        data: "collections.posts",
+        size: site.blogPageSize,
+        alias: "posts",
+    },
+};
 ```
+
+Most examples put that block straight in the template's front matter, and that works too. This site keeps it in `src/blog.11tydata.js`, a template data file that sits next to `blog.njk` and merges into its data, because front matter can only hold literal values. In a JavaScript data file, `size` can come from `site.blogPageSize`, the same number the {% demoLink "sitemap", "sitemap" %} and the pager above read. Change it in one place and all three agree.
 
 Inside the template, `posts` is now just the slice of posts for the current page, and a `pagination` object is available with everything you need to build page links: `pagination.pageNumber` (0-indexed), `pagination.hrefs` (every page's URL, in order), and more. The blog listing on this site uses exactly this to become `/blog/`, `/blog/2/`, `/blog/3/`, and so on, with a computed `permalink` so page 1 lands at the clean `/blog/` URL instead of `/blog/1/`.
 
@@ -27,12 +32,16 @@ The numbered links above aren't a mockup. They're built from the real post count
 ## Folder Structure
 
 ```text
-src/blog.njk                     ← pagination front matter + permalink logic
+src/blog.11tydata.js             ← the pagination block
+src/_data/site.js                ← blogPageSize, shared with the sitemap
+src/blog.njk                     ← permalink logic + the listing itself
 src/_includes/components/pager.njk ← the numbered link list
 src/_includes/demo-live/pagination.njk
 ```
 
 ## Important Files
+
+{% codeFile "src/blog.11tydata.js" %}
 
 {% codeFile "src/blog.njk" %}
 
@@ -42,4 +51,4 @@ src/_includes/demo-live/pagination.njk
 
 - By default, only the first paginated page gets added to `collections.all`, which is why `/blog/` shows up once in the header nav instead of three times.
 - `pagination.hrefs` already has every page's URL computed for you. There's no need to build the list of links by hand.
-- Page size is just a number. Bump `size: 3` up or down and the page count adjusts on its own.
+- Page size is just a number. Change `blogPageSize` in `site.js` and the blog, the sitemap, and this demo all adjust on their own. A build smoke test checks that the sitemap lists exactly the blog pages that were built.

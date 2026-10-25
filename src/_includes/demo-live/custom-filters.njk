@@ -15,9 +15,9 @@
   <li>{{ (collections.demos.length + collections.posts.length) | formatNumber }} pieces of content, total</li>
 </ul>
 
-<p><code>timeAgo</code> — the same filter shown on the real <a href="/blog/">blog listing</a>, reused here on the most recent post's actual date. It's built on `pluralize` from above, not a second copy of the same singular/plural logic:</p>
+<p><code>timeAgo</code> — built on <code>pluralize</code> from above, not a second copy of the same singular/plural logic. The filter ran when this page was built; the same file is also bundled into the browser script, which re-runs it on page load so the answer is right today rather than on build day:</p>
 <ul class="filter-demo-list">
-  <li>Newest post published {{ collections.posts[0].date | timeAgo }}</li>
+  <li>Newest post published <span data-time-ago="{{ collections.posts[0].date | htmlDateString }}">{{ collections.posts[0].date | timeAgo }}</span></li>
 </ul>
 
 <p><code>absoluteUrl</code> — not one of ours. This one ships with <code>@11ty/eleventy-plugin-rss</code> and is what turns every relative link into a real, absolute one in <a href="/feed.xml">the RSS feed</a>. Not every filter has to be hand-written:</p>

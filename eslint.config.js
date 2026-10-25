@@ -5,7 +5,7 @@ export default [
     { ignores: ["public/**", "node_modules/**"] },
     js.configs.recommended,
     {
-        files: ["eleventy.config.js", "src/_11ty/**/*.js", "src/_data/**/*.js"],
+        files: ["eleventy.config.js", "src/_11ty/**/*.js", "src/_data/**/*.js", "test/**/*.js"],
         languageOptions: {
             ecmaVersion: "latest",
             sourceType: "module",
@@ -13,7 +13,7 @@ export default [
         },
     },
     {
-        files: ["netlify/functions/**/*.js"],
+        files: ["netlify/**/*.js"],
         languageOptions: {
             ecmaVersion: "latest",
             sourceType: "module",

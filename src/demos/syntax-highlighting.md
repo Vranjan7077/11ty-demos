@@ -40,9 +40,7 @@ src/assets/scss/components/_code.scss     ← Prism token color theming
 
 ## Important Files
 
-{% codeFile "eleventy.config.js", 4, 4 %}
-
-{% codeFile "eleventy.config.js", 20, 20 %}
+{% codeFile "eleventy.config.js", "pluginSyntaxHighlight" %}
 
 ## Notes
 

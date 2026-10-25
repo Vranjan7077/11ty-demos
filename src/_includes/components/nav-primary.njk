@@ -7,7 +7,7 @@
       class="primary-nav__link"
       {% if entry.url == page.url %}aria-current="page"{% endif %}
     >{{ entry.title }}</a>
-    {% if entry.children.length %}
+    {% if entry.children.length and navStandalone %}
       {{ navList(entry.children, 1) }}
     {% endif %}
   </li>

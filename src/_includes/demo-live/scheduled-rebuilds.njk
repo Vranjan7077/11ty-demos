@@ -1,0 +1,24 @@
+<p>Everything below was recorded by a data file at the moment this page was built:</p>
+<dl class="data-files-demo">
+  <div class="data-files-demo__row">
+    <dt>Built</dt>
+    <dd><time datetime="{{ build.builtAt }}">{{ build.builtAt | readableDateTime }}</time><span data-time-ago="{{ build.builtAt | htmlDateString }}" data-time-ago-prefix=" · " hidden></span></dd>
+  </div>
+  <div class="data-files-demo__row">
+    <dt>Triggered by</dt>
+    <dd>
+      {%- if build.hookTitle %}the “{{ build.hookTitle }}” build hook
+      {%- elif build.context == "local" %}a build on someone's own machine
+      {%- else %}a git push or a manual deploy{% endif -%}
+    </dd>
+  </div>
+  <div class="data-files-demo__row">
+    <dt>Netlify context</dt>
+    <dd>{{ build.context }}</dd>
+  </div>
+  <div class="data-files-demo__row">
+    <dt>Commit</dt>
+    <dd>{% if build.commit %}<a href="{{ site.repoUrl }}/commit/{{ build.commit }}"><code>{{ build.commit }}</code></a>{% else %}not available outside Netlify{% endif %}</dd>
+  </div>
+</dl>
+<p>On the live site, a scheduled rebuild shows up here as the build hook, with the same commit as the day before: nothing in the repo changed, but the build-time data did.</p>

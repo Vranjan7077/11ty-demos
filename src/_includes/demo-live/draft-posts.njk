@@ -1,0 +1,15 @@
+{% if drafts.included %}
+<p>This build <b>includes</b> drafts, because it's either <code>npm start</code> or a Netlify deploy preview. {{ drafts.files.length | pluralize("draft") }} {{ "is" if drafts.files.length == 1 else "are" }} part of this build, marked with a banner and <code>noindex</code>:</p>
+<ul class="demo__live-list">
+  {% for item in drafts.files %}
+  <li><a href="{{ item.url }}">{{ item.title }}</a> — <code>{{ item.file }}</code></li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>This is a production build, so {{ drafts.files.length | pluralize("draft") }} {{ "was" if drafts.files.length == 1 else "were" }} left out entirely:</p>
+<ul class="demo__live-list">
+  {% for item in drafts.files %}
+  <li>“{{ item.title }}” — <code>{{ item.file }}</code>. Its URL, <a href="{{ item.url }}">{{ item.url }}</a>, is a real 404 here, and it isn't in the blog listing, feed, sitemap, or search.</li>
+  {% endfor %}
+</ul>
+{% endif %}

@@ -5,6 +5,7 @@ pagination:
   alias: tag
 permalink: "/demos/tags/{{ tag | slugify }}/"
 eleventyExcludeFromCollections: true
+ogEyebrow: "Demo tag"
 eleventyComputed:
   title: "{{ tag }}"
   description: "Every demo tagged “{{ tag }}”."
@@ -24,7 +25,7 @@ eleventyComputed:
 
   <div class="demo-grid">
     {% for demo in matching %}
-      {{ demoCardC.demoCard(demo) }}
+      {{ demoCardC.demoCard(demo, loop.index0 < 3) }}
     {% endfor %}
   </div>
 </div>

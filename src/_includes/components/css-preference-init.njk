@@ -1,0 +1,10 @@
+<script>
+  (function () {
+    try {
+      var prefs = JSON.parse(localStorage.getItem("reader-preferences") || "{}") || {};
+      if (prefs.css !== false) return;
+      var sheets = document.querySelectorAll('link[rel="stylesheet"]');
+      for (var i = 0; i < sheets.length; i++) sheets[i].disabled = true;
+    } catch (e) {}
+  })();
+</script>

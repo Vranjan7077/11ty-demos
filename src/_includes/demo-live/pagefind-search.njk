@@ -1,7 +1,12 @@
 <p>This box is powered by a real search index built from this site's actual built HTML, not the JSON index from the other Search demo. Try typing something, like "dark mode" or "collections":</p>
 <div id="pagefind-search" class="pagefind-search"></div>
 <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
-<script src="/pagefind/pagefind-ui.js"></script>
-<script>
-  new PagefindUI({ element: "#pagefind-search", showSubResults: true, showImages: false });
+<script src="/pagefind/pagefind-ui.js" defer></script>
+<script type="module">
+  const container = document.getElementById("pagefind-search");
+  if (window.PagefindUI) {
+    new PagefindUI({ element: container, showSubResults: true, showImages: false });
+  } else {
+    container.textContent = "The search index hasn't been built yet. Run npm run build first.";
+  }
 </script>

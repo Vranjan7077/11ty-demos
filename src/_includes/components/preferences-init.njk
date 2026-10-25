@@ -1,0 +1,28 @@
+<script>
+  (function () {
+    var root = document.documentElement;
+    root.classList.add("js");
+    try {
+      var stored = localStorage.getItem("theme");
+      var theme = stored || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      root.setAttribute("data-theme", theme);
+      var themeColor = document.querySelector('meta[name="theme-color"]');
+      if (themeColor) themeColor.setAttribute("content", themeColor.getAttribute(theme === "dark" ? "data-dark" : "data-light"));
+    } catch (e) {}
+    var prefs = {};
+    try {
+      prefs = JSON.parse(localStorage.getItem("reader-preferences") || "{}") || {};
+    } catch (e) {}
+    if (prefs.webFonts === false) {
+      root.classList.add("font-fallback");
+    } else {
+      var preload = document.createElement("link");
+      preload.rel = "preload";
+      preload.as = "font";
+      preload.type = "font/woff2";
+      preload.crossOrigin = "anonymous";
+      preload.href = "/assets/fonts/HankenGrotesk-Variable.woff2";
+      document.head.appendChild(preload);
+    }
+  })();
+</script>

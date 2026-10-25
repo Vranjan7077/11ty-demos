@@ -5,6 +5,13 @@ on:
         branches: [main, master]
     workflow_dispatch:
 
+permissions:
+    contents: read
+
+concurrency:
+    group: lighthouse-${{ github.ref }}
+    cancel-in-progress: true
+
 jobs:
     lighthouse:
         runs-on: ubuntu-latest
@@ -12,11 +19,9 @@ jobs:
             - uses: actions/checkout@v5
             - uses: actions/setup-node@v5
               with:
-                  node-version: 20
+                  node-version-file: .nvmrc
                   cache: "npm"
             - run: npm ci
-            - name: Run tests
-              run: npm test
             - name: Build site
               run: npm run build
             - name: Run Lighthouse CI

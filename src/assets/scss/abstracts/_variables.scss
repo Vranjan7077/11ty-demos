@@ -2,7 +2,7 @@ $breakpoint-sm: 40rem;
 $breakpoint-md: 56rem;
 $breakpoint-lg: 75rem;
 
-$font-sans:
+$font-system:
     ui-sans-serif,
     system-ui,
     -apple-system,
@@ -11,4 +11,5 @@ $font-sans:
     Helvetica,
     Arial,
     sans-serif;
+$font-sans: "Hanken Grotesk", $font-system;
 $font-mono: ui-monospace, "JetBrains Mono", "SFMono-Regular", Menlo, Consolas, "Liberation Mono", monospace;

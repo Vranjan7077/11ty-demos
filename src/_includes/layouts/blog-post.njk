@@ -2,12 +2,15 @@
 {% import "components/breadcrumbs.njk" as bcC %}
 
 {% block content %}
-<article class="wrapper post">
+<article class="wrapper post" data-reading-position data-content-version="{{ content | shortHash }}">
+  {% include "components/resume-reading.njk" %}
   {{ bcC.breadcrumbs([
     { text: "Home", url: "/" },
     { text: "Blog", url: "/blog/" },
     { text: title }
   ]) }}
+
+  {% if draft %}<p class="draft-banner" role="note"><b>Draft.</b> This post only appears in local and deploy-preview builds, never on the live site.</p>{% endif %}
 
   <header class="post__header">
     <h1 class="post__title">{{ title }}</h1>

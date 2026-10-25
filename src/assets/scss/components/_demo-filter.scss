@@ -1,0 +1,34 @@
+.demo-filter {
+    display: none;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: var(--space-sm) var(--space-md);
+    margin-bottom: var(--space-md);
+}
+
+.js .demo-filter {
+    display: flex;
+}
+
+.demo-filter select {
+    padding: var(--space-2xs);
+    border: 2px solid var(--color-fg);
+    background: var(--color-bg);
+    color: var(--color-fg);
+    font: inherit;
+}
+
+.demo-filter select:focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 1px;
+}
+
+.demo-filter__status {
+    flex-basis: 100%;
+    font-size: 0.9rem;
+    color: var(--color-fg-muted);
+}
+
+.demo-card[hidden] {
+    display: none;
+}

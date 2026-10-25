@@ -3,6 +3,8 @@
 
 @use "base/reset";
 @use "base/theme";
+@use "base/fonts";
+@use "base/transitions";
 @use "base/typography";
 @use "base/print";
 
@@ -18,6 +20,9 @@
 @use "components/toc";
 @use "components/code";
 @use "components/form";
+@use "components/demo-filter";
+@use "components/switch";
+@use "components/reading";
 @use "components/pagefind";
 @use "components/lighthouse";
 @use "components/view-counter";

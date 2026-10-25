@@ -1,6 +1,6 @@
 ---
 title: "Static doesn't mean boring"
-description: "Search, dark mode, dropdown nav, live syntax highlighting — none of it needed a server."
+description: "Search, dark mode, multi-level nav, live syntax highlighting — none of it needed a server."
 date: 2026-02-21
 ---
 

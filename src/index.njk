@@ -1,5 +1,6 @@
 ---
 title: ""
+ogTitle: "Real 11ty examples, not tutorials."
 description: "A single Eleventy site collecting independent, real, working implementations of common 11ty patterns — one demo per page."
 eleventyNavigation:
   key: Home
@@ -25,7 +26,7 @@ eleventyNavigation:
     <h2 class="home-section__title">Featured</h2>
     <div class="demo-grid">
       {% for demo in featured %}
-        {{ demoCardC.demoCard(demo) }}
+        {{ demoCardC.demoCard(demo, loop.index0 < 3) }}
       {% endfor %}
     </div>
   </section>

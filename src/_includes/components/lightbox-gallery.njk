@@ -1,0 +1,3 @@
+{% macro lightboxItem(item, className) %}
+<a class="{{ className }} lightbox-link" href="{{ item.full }}" data-lightbox-item data-full="{{ item.fullWebp }}" data-width="{{ item.width }}" data-height="{{ item.height }}">{{ item.html | safe }}</a>
+{% endmacro %}

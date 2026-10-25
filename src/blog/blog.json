@@ -1,6 +1,7 @@
 {
     "layout": "layouts/blog-post.njk",
     "tags": ["post"],
+    "ogType": "article",
     "eleventyComputed": {
         "permalink": "/blog/{{ page.fileSlug }}/"
     }
